@@ -8,6 +8,10 @@ export class EventService {
   getEvents() {
     return events
   }
+
+  getEvent(id: number) {
+    return events.find(e => e.id === id);
+  }
 }
 
 const events = [
@@ -140,7 +144,7 @@ const events = [
           abstract: `In this session, Lukas will present the 
           secret to being awesome, and how he became the President 
           of the United States through his amazing programming skills, 
-          showing how you too can be success with just attitude.`, 
+          showing how you too can be success with just attitude.`,
           voters: ['bradgreen']
         },
       ]

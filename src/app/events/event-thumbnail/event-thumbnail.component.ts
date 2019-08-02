@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+  import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'event-thumbnail',
@@ -13,4 +13,4 @@ export class EventThumbnailComponent {
       return {color: '#003300', 'font-weight': 'bold'}
     return {}
   }
-} 
+}
