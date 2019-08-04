@@ -7,18 +7,21 @@ import { NavBarComponent } from './nav/nav-bar.component'
 import { EventThumbnailComponent } from './events/event-thumbnail/event-thumbnail.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EventDetailsComponent } from './events/event-details/event-details.component';
+import { EventDetailsComponent } from './events/event-thumbnail/event-details/event-details.component';
 import {RouterModule} from "@angular/router";
 import {appRoutes} from "./routes";
 import { CreateEventComponent } from './events/create-event/create-event.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import {FormsModule} from "@angular/forms";
+import { CreateSessionComponent } from './events/event-thumbnail/event-details/create-session/create-session.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule
   ],
   declarations: [
     EventsAppComponent,
@@ -27,7 +30,8 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
     NavBarComponent,
     EventDetailsComponent,
     CreateEventComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CreateSessionComponent
   ],
   providers: [
     {

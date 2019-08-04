@@ -16,8 +16,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.profileForm = this.formBuilder.group({
-      firstName: [this.authService.currentUser.firstName, Validators.required],
-      lastName: [this.authService.currentUser.lastName, Validators.required]
+      firstName: [this.authService.currentUser.firstName, [Validators.required,
+                  Validators.pattern('[a-zA-Z].*')]],
+      lastName: [this.authService.currentUser.lastName, [Validators.required,
+                  Validators.pattern('[a-zA-Z].*')]]
     })
   }
 
@@ -30,5 +32,13 @@ export class ProfileComponent implements OnInit {
       this.authService.updateCurrentUser(this.profileForm.controls['firstName'].value,
         this.profileForm.controls['lastName'].value);
     }
+  }
+
+  validateInput(controlName: string): boolean {
+    if (this.profileForm.controls[controlName].invalid &&
+      this.profileForm.controls[controlName].touched) {
+      return true;
+    }
+    return false;
   }
 }
