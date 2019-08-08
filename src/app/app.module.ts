@@ -12,8 +12,11 @@ import {RouterModule} from "@angular/router";
 import {appRoutes} from "./routes";
 import { CreateEventComponent } from './events/create-event/create-event.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CreateSessionComponent } from './events/event-thumbnail/event-details/create-session/create-session.component';
+import { SessionDetailsComponent } from './events/event-thumbnail/event-details/session-details/session-details.component';
+import {CollapsibleWellComponent} from "./common/collapsible-well.component";
+import {DurationPipe} from "./shared/duration.pipe";
 
 @NgModule({
   imports: [
@@ -21,7 +24,8 @@ import { CreateSessionComponent } from './events/event-thumbnail/event-details/c
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     EventsAppComponent,
@@ -31,7 +35,10 @@ import { CreateSessionComponent } from './events/event-thumbnail/event-details/c
     EventDetailsComponent,
     CreateEventComponent,
     NotFoundComponent,
-    CreateSessionComponent
+    CreateSessionComponent,
+    SessionDetailsComponent,
+    CollapsibleWellComponent,
+    DurationPipe
   ],
   providers: [
     {

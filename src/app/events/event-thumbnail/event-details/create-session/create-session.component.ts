@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ISession} from "../../../../shared/models/events/ievent.model";
+import {restrictedWords} from "../../../../shared/validators/create-session.validator";
 
 @Component({
   selector: 'app-create-session',
@@ -8,6 +10,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class CreateSessionComponent implements OnInit {
   sessionForm: FormGroup;
+  @Output() saveNewSession = new EventEmitter();
+  @Output() cancelAddSession = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -15,11 +19,36 @@ export class CreateSessionComponent implements OnInit {
     this.sessionForm = this.formBuilder.group({
       name: ['', Validators.required],
       presenter: ['', Validators.required],
-      duration: [null, Validators.required],
-      level: [null, Validators.required],
+      duration: ['', Validators.required],
+      level: ['', Validators.required],
       abstract: ['', [Validators.required,
-        Validators.maxLength(400)]]
+        Validators.maxLength(400), restrictedWords(['foo', 'bar'])]]
     })
   }
 
+  saveSession(formValue) {
+    let session: ISession = {
+      id: 0,
+      name: formValue.name,
+      duration: +formValue.duration,
+      presenter: formValue.presenter,
+      level: formValue.level,
+      abstract: formValue.abstract,
+      voters: []
+    }
+
+    this.saveNewSession.emit(session);
+  }
+
+  validateInput(formControl: string): boolean {
+    if (this.sessionForm.controls[formControl].invalid &&
+        this.sessionForm.controls[formControl].dirty)
+      return true;
+
+    return false;
+  }
+
+  cancel() {
+    this.cancelAddSession.emit();
+  }
 }
