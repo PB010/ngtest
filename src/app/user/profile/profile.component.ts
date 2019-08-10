@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Form, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,8 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.profileForm = this.formBuilder.group({
@@ -23,8 +25,8 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  redirectToEvents() {
-    this.router.navigate(['events']);
+  toastrNotification() {
+    this.toastrService.success('Profile Saved');
   }
 
   saveProfile() {

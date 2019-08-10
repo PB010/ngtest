@@ -9,6 +9,7 @@ import {ISession} from "../../../../shared/models/events/ievent.model";
 export class SessionDetailsComponent implements OnChanges {
   @Input() sessions: ISession[];
   @Input() filterBy: string;
+  @Input() sortBy: string;
   visibleSessions: ISession[] = [];
 
   constructor() { }
@@ -19,11 +20,14 @@ export class SessionDetailsComponent implements OnChanges {
   ngOnChanges(): void {
     if(this.sessions) {
       this.filterSessions(this.filterBy);
+      this.sortBy === 'name'
+        ? this.visibleSessions.sort(this.sortByNameAsc)
+        : this.visibleSessions.sort(this.sortByVotesDesc);
     }
   }
 
   filterSessions(filter: string): void {
-    if(filter === 'all'){
+    if(filter === 'all')  {
       this.visibleSessions = this.sessions.slice(0);
     } else {
         this.visibleSessions = this.sessions.filter(
@@ -31,4 +35,13 @@ export class SessionDetailsComponent implements OnChanges {
     }
   }
 
+  sortByNameAsc(firstSession: ISession, secondSession: ISession): number {
+    if (firstSession.name > secondSession.name) return 1
+    else if (firstSession.name = secondSession.name) return 0
+    else return -1
+  }
+
+  sortByVotesDesc(firstSession: ISession, secondSession: ISession): number {
+    return secondSession.voters.length - firstSession.voters.length;
+  }
 }
