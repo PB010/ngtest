@@ -20,6 +20,8 @@ import {DurationPipe} from "./shared/duration.pipe";
 import { SimpleModalComponent } from './common/simple-modal/simple-modal.component';
 import {JQ_TOKEN} from "./common/jQuery.service";
 import {ModalTriggerDirective} from "./common/simple-modal/modal-trigger.directive";
+import { UpVoteComponent } from './events/event-thumbnail/event-details/session-details/upvote/up-vote.component';
+import {ValidateLocationDirective} from "./shared/validators/validate-location.directive";
 
 let jQuery = window['$'];
 
@@ -45,7 +47,9 @@ let jQuery = window['$'];
     CollapsibleWellComponent,
     DurationPipe,
     SimpleModalComponent,
-    ModalTriggerDirective
+    ModalTriggerDirective,
+    UpVoteComponent,
+    ValidateLocationDirective
   ],
   providers: [
     {
